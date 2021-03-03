@@ -4,4 +4,4 @@ metadata:
   name: at-sample
 spec:
   schedule: "2019-04-12T10:12:00Z"
-  command: "echo YAY!"
+  command: "echo Hello World !!"
