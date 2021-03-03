@@ -1,0 +1,7 @@
+domain: kbdlr.rocks
+repo: github.com/jaingaurav001/kbcnat
+resources:
+- group: cnat
+  kind: At
+  version: v1alpha1
+version: "2"
