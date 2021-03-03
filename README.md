@@ -24,8 +24,10 @@ Create the kubernetes cluster using KinD
 
 Access the kubernetes cluster
 
-`$ kubectl cluster-info --context kind-kind
-$ kubectl get po --all-namespaces`
+```
+$ kubectl cluster-info --context kind-kind
+$ kubectl get po --all-namespaces
+```
 
 Install the kubernetes controller CRD into kubernetes cluster
 
@@ -33,38 +35,46 @@ Install the kubernetes controller CRD into kubernetes cluster
 
 Run the kubernetes controller
 
-`$ make run
+```
+$ make run
 	or
 $ make docker-build docker-push IMG=localhost/kbcnat:0.0.1
 $ make docker-build docker-push IMG=localhost/kbcnat:0.0.1
-$ make deploy IMG=localhost:5000/kbcnat:0.0.1`
+$ make deploy IMG=localhost:5000/kbcnat:0.0.1
+```
 
 Verify the kubernetes controller
 
-`$ kubectl get po -n kbcnat-system 
+```
+$ kubectl get po -n kbcnat-system 
 NAMESPACE            NAME                                         READY   STATUS    RESTARTS   AGE
 kbcnat-system        kbcnat-controller-manager-594967764c-d59vr   2/2     Running   0          13s
 
-$ kubectl logs kbcnat-controller-manager-594967764c-d59vr -n kbcnat-system -f -c manager`
+$ kubectl logs kbcnat-controller-manager-594967764c-d59vr -n kbcnat-system -f -c manager
+```
 
 ## Test the controller
 Schedule a pod using the deployed kubernetes controller.
 
 Create the YAML
 
-`$ cat config/samples/cnat_v1alpha1_at.yaml
+```
+$ cat config/samples/cnat_v1alpha1_at.yaml
 apiVersion: cnat.kbdlr.rocks/v1alpha1
 kind: At
 metadata:
   name: at-sample
 spec:
   schedule: "2019-04-12T10:12:00Z"
-  command: "echo Hello World !!"`
+  command: "echo Hello World !!"
+```
 
 Apply the YAML
 
-`$ kubectl apply -f config/samples/cnat_v1alpha1_at.yaml
-at.cnat.kbdlr.rocks/at-sample created`
+```
+$ kubectl apply -f config/samples/cnat_v1alpha1_at.yaml
+at.cnat.kbdlr.rocks/at-sample created
+```
 
 Verify the created CRD resource
 
@@ -72,14 +82,17 @@ Verify the created CRD resource
 
 Verify the schedule pod
 
-`$ kubectl get po
+```
+$ kubectl get po
 NAME        READY   STATUS      RESTARTS   AGE
-at-sample   0/1     Completed   0          23s`
+at-sample   0/1     Completed   0          23s
+```
 
 Verify the pod logs
-
-`$ kubectl logs at-sample
-Hello World !!`
+```
+$ kubectl logs at-sample
+Hello World !!
+```
 
 ## Teardown the setup
 Remove the kubernetes controller CRD from the kubernetes cluster
@@ -88,9 +101,12 @@ Remove the kubernetes controller CRD from the kubernetes cluster
 
 Remove the kubernetes controller
 
-`$ make kill-deploy IMG=localhost:5000/kbcnat:0.0.1
+```
+$ make kill-deploy IMG=localhost:5000/kbcnat:0.0.1
+
 $ kubectl get po -n kbcnat-system
-No resources found in kbcnat-system namespace.`
+No resources found in kbcnat-system namespace.
+```
 
 Delete the Cluster with Kind
 
