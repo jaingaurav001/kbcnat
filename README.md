@@ -38,19 +38,18 @@ Run the kubernetes controller
 ```
 $ make run
 	or
-$ make docker-build docker-push IMG=localhost/kbcnat:0.0.1
-$ make docker-build docker-push IMG=localhost/kbcnat:0.0.1
+$ make docker-build docker-push IMG=localhost:5000/kbcnat:0.0.1
 $ make deploy IMG=localhost:5000/kbcnat:0.0.1
 ```
 
 Verify the kubernetes controller
 
 ```
-$ kubectl get po -n kbcnat-system 
+$ kubectl get po -l control-plane=controller-manager -n kbcnat-system
 NAMESPACE            NAME                                         READY   STATUS    RESTARTS   AGE
 kbcnat-system        kbcnat-controller-manager-594967764c-d59vr   2/2     Running   0          13s
 
-$ kubectl logs kbcnat-controller-manager-594967764c-d59vr -n kbcnat-system -f -c manager
+$ kubectl logs -l control-plane=controller-manager -n kbcnat-system -c manager -f
 ```
 
 ## Test the controller
