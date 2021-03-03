@@ -16,6 +16,8 @@ The controller will basically wait and watch till the appropriate time, then wou
 - kubebuilder
 - Go 1.13
 
+NOTE: Tested with Docker=18.09, Kind=0.8.1, kubernetes=v1.19.0, kubectl=v1.19.0, kustomize=3.7.0, kubebuilder=2.3.1
+
 ## Create the setup
 
 Create the kubernetes cluster using KinD
